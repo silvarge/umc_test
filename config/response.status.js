@@ -27,6 +27,10 @@ export const status = {
     // login err
     LOGIN_PARAM_NOT_EXIST: {status: StatusCodes.BAD_REQUEST, "isSuccess": false, "code": "SIGNIN4001", "message": "ID 혹은 PW 값이 존재하지 않습니다."},
     LOGIN_ID_NOT_EXIST : {status: StatusCodes.NOT_FOUND, "isSuccess": false, "code": "SIGNIN4002", "message": "아이디를 찾을 수 없습니다."},
-    LOGIN_PASSWORD_WRONG : {status: StatusCodes.BAD_REQUEST, "isSuccess": false, "code": "SIGNIN4003", "message": "비밀번호가 일치하지 않습니다." }
+    LOGIN_PASSWORD_WRONG : {status: StatusCodes.BAD_REQUEST, "isSuccess": false, "code": "SIGNIN4003", "message": "비밀번호가 일치하지 않습니다." },
+    TOKEN_IS_EXPIRED: {status: StatusCodes.INSUFFICIENT_SPACE_ON_RESOURCE, "isSuccess": false, "code": "SIGNIN4004", "message": "토큰이 만료되었습니다." },
+    TOKEN_IS_INVALID: {status: StatusCodes.UNAUTHORIZED, "isSuccess": false, "code": "SIGNIN4005", "message": "유효하지 않은 토큰입니다." },
+
+    // paging err
 
 };

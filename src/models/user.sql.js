@@ -9,7 +9,7 @@ export const connectFoodCategory = "INSERT INTO user_favor_category (f_category_
 
 export const confirmEmail = "SELECT EXISTS(SELECT 1 FROM user WHERE email = ?) as isExistEmail";
 
-export const getPreferToUserID =
+export const getPreferByUserID =
 "SELECT ufc.uf_category_id, ufc.f_category_id, ufc.user_id, fcl.f_category_name "
 + "FROM user_favor_category ufc JOIN food_category_list fcl on ufc.f_category_id = fcl.f_category_id "
 + "WHERE ufc.user_id = ? ORDER BY ufc.f_category_id ASC;";
