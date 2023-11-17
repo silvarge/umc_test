@@ -10,7 +10,7 @@ export const getLoginUser = async (email) =>{
     if(typeof email == "undefined"){
         throw new BaseError(status.LOGIN_PARAM_NOT_EXIST);
     }else{
-        const userData = await logInUser(email)
+        const userData = await logInUser(email);
         
         if(userData == -1){
             throw new BaseError(status.LOGIN_ID_NOT_EXIST);
