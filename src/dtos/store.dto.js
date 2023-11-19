@@ -11,11 +11,16 @@ export const previewReviewResponseDTO = (data) => {
         })
     }
 
-    console.log(reviews);
-
     return {"reviewData": reviews, "cursorId": data[data.length-1].review_id};
 }
+
+export const registReviewResponseDTO = (data) => {
+    return {"username": data.user_name, "rate": data.rate, "content": data.review_content, "created_at": formatDate(data.created_at)};
+}
+
+
 
 const formatDate = (date) => {
     return new Intl.DateTimeFormat('kr').format(new Date(date)).replaceAll(" ", "").slice(0, -1);
 }
+
