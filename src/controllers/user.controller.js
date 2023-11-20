@@ -18,3 +18,8 @@ export const userSignin = async (req, res, next) => {
 
     res.send(response(status.SUCCESS, await joinUser(req.body)));
 }
+
+export const userAddMission = async (req, res, next) => {
+
+    res.send(response(status.SUCCESS, await addMission(req.params.missionId, req.body.userId)));
+}
