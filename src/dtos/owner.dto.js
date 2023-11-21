@@ -9,3 +9,11 @@ export const registMissionResponseDTO = (data) => {
         "deadline": moment(data.mission_deadline).format('YYYY-MM-DD HH:mm')
     };
 }
+
+export const registRegionResponseDTO = (data) => {
+    return {
+        "store_region_id": data.rr_id,
+        "restaurant": data.restaurant_name,
+        "region": data.region_name
+    };
+}

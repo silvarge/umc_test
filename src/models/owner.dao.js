@@ -1,7 +1,7 @@
 import { pool } from "../../config/db.connect";
 import { BaseError } from "../../config/error";
 import { status } from "../../config/response.status";
-import { checkStoreIsExist, getMissionByMissionIdSql, insertMissionSql } from "./owner.sql";
+import { checkStoreIsExist, getMappingRegion, getMissionByMissionIdSql, getRegionIdSql, insertMissionSql, mappingRegionNStore } from "./owner.sql";
 
 export const addDBToMission = async (storeId, content, deadline, point) => {
     try {
@@ -25,4 +25,36 @@ export const addDBToMission = async (storeId, content, deadline, point) => {
         throw new BaseError(status.PARAMETER_IS_WRONG);
     }
 
+}
+
+export const existRegion = async (region) => {
+    try {
+        const conn = await pool.getConnection();
+
+        console.log(typeof(region));
+        const [result] = await pool.query(getRegionIdSql, region);
+
+        conn.release();
+        return result[0];
+
+    } catch (err) {
+        console.error(err);
+        throw new BaseError(status.PARAMETER_IS_WRONG);
+    }
+}
+
+export const addDBToRegion = async (storeId, regionId) => {
+    try {
+        const conn = await pool.getConnection();
+
+        const [insertResult] = await pool.query(mappingRegionNStore, [storeId, regionId]);
+        const [result] = await pool.query(getMappingRegion, insertResult.insertId);
+        console.log(result);
+        conn.release();
+        return result[0];
+        
+    } catch (err) {
+        console.error(err);
+        throw new BaseError(status.PARAMETER_IS_WRONG);
+    }
 }
