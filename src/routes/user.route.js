@@ -7,4 +7,4 @@ export const userRouter = express.Router();
 
 userRouter.post('/login', asyncHandler(userLogin));
 userRouter.post('/signin', asyncHandler(userSignin));
-userRouter.post('/mission', asyncHandler(userAddMission));
+userRouter.post('/mission/:storeId', asyncHandler(userAddMission));

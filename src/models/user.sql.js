@@ -13,3 +13,9 @@ export const getPreferByUserID =
 "SELECT ufc.uf_category_id, ufc.f_category_id, ufc.user_id, fcl.f_category_name "
 + "FROM user_favor_category ufc JOIN food_category_list fcl on ufc.f_category_id = fcl.f_category_id "
 + "WHERE ufc.user_id = ? ORDER BY ufc.f_category_id ASC;";
+
+export const challengeMissionSql = "insert into user_mission (user_id, mission_id) values (?, ?)";
+
+export const getChallengeMissionSql = "select u_mission_id, user_id, um.mission_id, u_mission_status, mission_content, mission_deadline, mission_point, r.restaurant_name "
++"from user_mission um join mission m on um.mission_id = m.mission_id join restaurant r on m.restaurant_id = r.restaurant_id "
++"where u_mission_id = ?;";

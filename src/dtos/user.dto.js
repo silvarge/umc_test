@@ -1,3 +1,5 @@
+import moment from "moment";
+
 // login response DTO
 export const loginResponseDTO = (data) => {
     return {"email": data[0].email};
@@ -21,6 +23,10 @@ export const signinResponseDTO = (user, prefer) => {
 }
 
 export const challengeMissionResponseDTO = (result) => {
-
-    return {"null": "null"};
+    return {
+        "challenge_mission_id": result.u_mission_id,
+        "store": result.restaurant_name,
+        "mission": result.mission_content,
+        "deadline": moment(result.mission_deadline).format('YYYY-MM-DD HH:mm')
+    };
 }

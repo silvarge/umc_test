@@ -6,6 +6,6 @@ export const registMissionResponseDTO = (data) => {
         "restaurant": data.restaurant_name,
         "content": data.mission_content,
         "point": data.mission_point,
-        "deadline": moment(data.mission_deadline).format()
+        "deadline": moment(data.mission_deadline).format('YYYY-MM-DD HH:mm')
     };
 }
