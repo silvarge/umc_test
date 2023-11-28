@@ -114,7 +114,6 @@ export const getMyReview = async (userId, reviewId, paging) => {
 
     try {
         const conn = await pool.getConnection();
-        console.log(paging);
         
         if(reviewId==-1){
             const [temp] = await pool.query(reviewCount);

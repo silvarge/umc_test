@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const previewReviewResponseDTO = (data) => {
 
     const reviews = [];
@@ -7,7 +9,7 @@ export const previewReviewResponseDTO = (data) => {
             "user_name": data[i].user_name,
             "rate": data[i].rate,
             "review_body": data[i].review_content,
-            "create_date": formatDate(data[i].created_at)
+            "create_date": moment(data[i].created_at).format('YYYY.MM.DD')
         })
     }
 
@@ -15,12 +17,22 @@ export const previewReviewResponseDTO = (data) => {
 }
 
 export const registReviewResponseDTO = (data) => {
-    return {"username": data.user_name, "rate": data.rate, "content": data.review_content, "created_at": formatDate(data.created_at)};
+    return {"username": data.user_name, "rate": data.rate, "content": data.review_content, "created_at": moment(data.created_at).format('YYYY.MM.DD')};
 }
 
+export const storeMissionResponseDTO = (data) => {
 
+    const mission = [];
+    for (let i = 0; i < data.length; i++) {
+        mission.push({
+            "missionId": data[i].mission_id,
+            "Content": data[i].mission_content,
+            "Deadline": moment(data[i].mission_deadline).format('YYYY.MM.DD HH:mm'),
+            "point": data[i].mission_point,
+            "status": data[i].mission_status,
+            "createAt": moment(data[i].created_at).format('YYYY.MM.DD')
+        });
+    }
 
-const formatDate = (date) => {
-    return new Intl.DateTimeFormat('kr').format(new Date(date)).replaceAll(" ", "").slice(0, -1);
+    return {"mission": mission};
 }
-

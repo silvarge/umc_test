@@ -47,5 +47,5 @@ export const userReviewResponseDTO = (result) => {
         })
     }
 
-    return reviewResult;
+    return {"review": reviewResult};
 }

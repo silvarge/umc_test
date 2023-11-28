@@ -17,3 +17,12 @@ export const insertReviewSql = "insert into review (user_id, restaurant_id, rate
 export const getReviewByReviewId = "select u.user_name, u.user_id, r.review_id, r.rate, r.review_content, r.created_at "
 + "from review r join user u on r.user_id = u.user_id "
 + "where r.review_id = ?;"
+
+export const countMission = "select count(*) as missionCount from mission";
+
+export const getStoreMissionSql =
+"select * "
++ "from mission m "
++ "where m.restaurant_id = ? and m.mission_id < ? "
++ "order by created_at desc "
++ "limit ?;";
