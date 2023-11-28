@@ -30,3 +30,10 @@ export const challengeMissionResponseDTO = (result) => {
         "deadline": moment(result.mission_deadline).format('YYYY-MM-DD HH:mm')
     };
 }
+
+export const userReviewResponseDTO = (result) => {
+
+    console.log("DTO", result);
+
+    return {"null" : "null"};
+}

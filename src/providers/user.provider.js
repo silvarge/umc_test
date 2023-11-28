@@ -2,7 +2,7 @@
 import { BaseError } from "../../config/error.js";
 import { status } from "../../config/response.status.js";
 import { loginResponseDTO } from "../dtos/user.dto.js";
-import { logInUser } from "../models/user.dao.js";
+import { getMyReview, logInUser } from "../models/user.dao.js";
 
 export const getLoginUser = async (email) =>{
 
@@ -19,4 +19,17 @@ export const getLoginUser = async (email) =>{
         }
     }
 
+}
+
+export const getUserReview = async (userId, query) => {
+
+    const {reviewId = -1, size = 3} = query;
+
+    if (!userId) {
+        // 아이디 입력 안됨
+        throw new BaseError(status.BAD_REQUEST);
+    }else{
+        const userData = await getMyReview(userId, reviewId, size);
+        return userReviewResponseDTO(userData);
+    }
 }

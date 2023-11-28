@@ -1,7 +1,7 @@
 import { response } from "../../config/response.js";
 import { status } from "../../config/response.status.js";
 
-import { getLoginUser } from "../providers/user.provider.js";
+import { getLoginUser, getUserReview } from "../providers/user.provider.js";
 import { challengeMission, joinUser } from "../services/user.service.js";
 
 export const userLogin = async (req, res, next) => {
@@ -22,5 +22,14 @@ export const userSignin = async (req, res, next) => {
 export const userAddMission = async (req, res, next) => {
     console.log("userAddMission");
     console.log(req.params.storeId);
+
     res.send(response(status.SUCCESS, await challengeMission(req.params.storeId, req.body.userId)));
+}
+
+export const userWriteReview = async (req, res, next) => {
+    console.log("userWriteReview");
+    console.log("body", req.body);
+    console.log("query", req.query);
+
+    res.send(response(status.SUCCESS, await getUserReview(req.body.userId, req.query)));
 }

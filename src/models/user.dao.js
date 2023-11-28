@@ -109,3 +109,20 @@ export const addChallengeMission = async (missionId, userId) => {
         throw new BaseError(status.PARAMETER_IS_WRONG);
     }
 }
+
+export const getMyReview = async (userId, reviewId, size) => {
+    try {
+        const conn = await pool.getConnection();
+        if(reviewId==-1){
+            console.log();
+        }
+
+
+        conn.release();
+
+        return ;
+    } catch (err) {
+        console.error(err);
+        throw new BaseError(status.PARAMETER_IS_WRONG);
+    }
+}

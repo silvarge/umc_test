@@ -49,7 +49,6 @@ export const addDBToRegion = async (storeId, regionId) => {
 
         const [insertResult] = await pool.query(mappingRegionNStore, [storeId, regionId]);
         const [result] = await pool.query(getMappingRegion, insertResult.insertId);
-        console.log(result);
         conn.release();
         return result[0];
         
