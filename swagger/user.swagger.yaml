@@ -143,25 +143,30 @@ paths:
         - User
       summary: 자기가 작성한 리뷰 조회
       parameters:
-      - in: body
-        required: true
-        schema:
-          properties:
-            userId:
-              type: integer
-              description: 유저아이디
-              example: 1
-      - in: query
-        schema:
-          properties:
-            reviewId:
-              type: integer
-              description: 리뷰 아이디
-              example: 1
-            size:
-              type: integer
-              description: 페이징 사이즈
-              example: 5
+        - name: userId
+          in: query
+          required: true
+          schema:
+            properties:
+              userId:
+                type: integer
+                example: 1
+        - name: reviewId
+          in: query
+          required: false
+          schema:
+            properties:
+              reviewId:
+                type: integer
+                example: 1
+        - name: paging
+          in: query
+          required: false
+          schema:
+            properties:
+              size:
+                type: integer
+                example: 1
       responses:
         '200':
           description: 리뷰 조회 성공!

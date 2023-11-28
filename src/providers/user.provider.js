@@ -1,7 +1,7 @@
 // Read의 로직 처리 (GET 처리)
 import { BaseError } from "../../config/error.js";
 import { status } from "../../config/response.status.js";
-import { loginResponseDTO } from "../dtos/user.dto.js";
+import { loginResponseDTO, userReviewResponseDTO } from "../dtos/user.dto.js";
 import { getMyReview, logInUser } from "../models/user.dao.js";
 
 export const getLoginUser = async (email) =>{
@@ -21,15 +21,15 @@ export const getLoginUser = async (email) =>{
 
 }
 
-export const getUserReview = async (userId, query) => {
+export const getUserReview = async (query) => {
 
-    const {reviewId = -1, size = 3} = query;
+    const {userId, reviewId = -1, paging = 3} = query;
 
     if (!userId) {
         // 아이디 입력 안됨
         throw new BaseError(status.BAD_REQUEST);
     }else{
-        const userData = await getMyReview(userId, reviewId, size);
+        const userData = await getMyReview(parseInt(userId), parseInt(reviewId), parseInt(paging));
         return userReviewResponseDTO(userData);
     }
 }

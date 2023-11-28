@@ -21,7 +21,7 @@ export const getChallengeMissionSql = "select u_mission_id, user_id, um.mission_
 +"from user_mission um join mission m on um.mission_id = m.mission_id join restaurant r on m.restaurant_id = r.restaurant_id "
 +"where u_mission_id = ?;";
 
-export const reviewCount = "select count(*) from review as reviewCount";
+export const reviewCount = "select count(*) as reviewCount from review ";
 
 export const getMyReviewSql =
 "select u.user_name, u.user_id, r.review_id, r.rate, r.review_content, r.created_at "

@@ -33,7 +33,19 @@ export const challengeMissionResponseDTO = (result) => {
 
 export const userReviewResponseDTO = (result) => {
 
-    console.log("DTO", result);
+    const reviewResult = [];
 
-    return {"null" : "null"};
+    for (let i = 0; i < result.length; i++) {
+        console.log(result[i]);
+        reviewResult.push({
+            "userId": result[i].user_id,
+            "userName": result[i].user_name,
+            "reviewId": result[i].review_id,
+            "rate": result[i].rate,
+            "reviewContext": result[i].review_content,
+            "date": moment(result[i].created_at).format('YYYY-MM-DD')
+        })
+    }
+
+    return reviewResult;
 }

@@ -1,7 +1,7 @@
 import { pool } from "../../config/db.connect";
 import { BaseError } from "../../config/error";
 import { status } from "../../config/response.status";
-import { challengeMissionSql, confirmEmail, connectFoodCategory, getChallengeMissionSql, getPreferToUserID, getUserEmail, getUserID, insertUserSql } from "./user.sql";
+import { challengeMissionSql, confirmEmail, connectFoodCategory, getChallengeMissionSql, getMyReviewSql, getPreferToUserID, getUserEmail, getUserID, insertUserSql, reviewCount } from "./user.sql";
 
 // log in
 export const logInUser = async (data) => {
@@ -110,17 +110,20 @@ export const addChallengeMission = async (missionId, userId) => {
     }
 }
 
-export const getMyReview = async (userId, reviewId, size) => {
+export const getMyReview = async (userId, reviewId, paging) => {
+
     try {
         const conn = await pool.getConnection();
+        console.log(paging);
+        
         if(reviewId==-1){
-            console.log();
+            const [temp] = await pool.query(reviewCount);
+            reviewId = temp[0].reviewCount;
         }
-
-
+        const [result] = await pool.query(getMyReviewSql, [userId, reviewId, paging]);
+        
         conn.release();
-
-        return ;
+        return result;
     } catch (err) {
         console.error(err);
         throw new BaseError(status.PARAMETER_IS_WRONG);

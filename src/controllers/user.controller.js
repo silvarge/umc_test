@@ -28,8 +28,7 @@ export const userAddMission = async (req, res, next) => {
 
 export const userWriteReview = async (req, res, next) => {
     console.log("userWriteReview");
-    console.log("body", req.body);
     console.log("query", req.query);
 
-    res.send(response(status.SUCCESS, await getUserReview(req.body.userId, req.query)));
+    res.send(response(status.SUCCESS, await getUserReview(req.query)));
 }
