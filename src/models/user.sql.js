@@ -30,3 +30,11 @@ export const getMyReviewSql =
 + "order by created_at desc "
 + "limit ?";
 
+export const userMissionCount = "select count(*) as missionCount from user_mission;";
+
+export const getUserMissionListSql =
+"select um.u_mission_id , um.user_id, um.mission_id , um.u_mission_status , um.confirm_number , um.created_at , m.mission_content , m.mission_deadline , m.mission_point "
++ "from user_mission um left join mission m ON um.mission_id = m.mission_id "
++ "where um.user_id = ? and um.u_mission_id < ? and u_mission_status = ? "
++ "order by created_at desc "
++ "limit ?;";

@@ -1,8 +1,8 @@
 // Read의 로직 처리 (GET 처리)
 import { BaseError } from "../../config/error.js";
 import { status } from "../../config/response.status.js";
-import { loginResponseDTO, userReviewResponseDTO } from "../dtos/user.dto.js";
-import { getMyReview, logInUser } from "../models/user.dao.js";
+import { loginResponseDTO, userMissionListResponseDTO, userReviewResponseDTO } from "../dtos/user.dto.js";
+import { getMyReview, getUserMission, logInUser } from "../models/user.dao.js";
 
 export const getLoginUser = async (email) =>{
 
@@ -18,7 +18,6 @@ export const getLoginUser = async (email) =>{
             return loginResponseDTO(userData);
         }
     }
-
 }
 
 export const getUserReview = async (query) => {
@@ -31,5 +30,17 @@ export const getUserReview = async (query) => {
     }else{
         const userData = await getMyReview(parseInt(userId), parseInt(reviewId), parseInt(paging));
         return userReviewResponseDTO(userData);
+    }
+}
+
+export const getUserMissionList = async (query) => {
+
+    const {userId, missionId = -1, paging = 3, status = 0} = query;
+
+    if(!userId){
+        throw new BaseError(status.BAD_REQUEST);
+    }else{
+        const userData = await getUserMission(parseInt(userId), parseInt(missionId), parseInt(paging), status);
+        return userMissionListResponseDTO(userData);
     }
 }

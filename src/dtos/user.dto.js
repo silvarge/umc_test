@@ -36,7 +36,6 @@ export const userReviewResponseDTO = (result) => {
     const reviewResult = [];
 
     for (let i = 0; i < result.length; i++) {
-        console.log(result[i]);
         reviewResult.push({
             "userId": result[i].user_id,
             "userName": result[i].user_name,
@@ -48,4 +47,23 @@ export const userReviewResponseDTO = (result) => {
     }
 
     return {"review": reviewResult};
+}
+
+export const userMissionListResponseDTO = (result) => {
+
+    const missionList = [];
+
+    for (let i = 0; i < result.length; i++) {
+        missionList.push({
+            "userMissionId": result[i].u_mission_id,
+            "missionId": result[i].mission_id,
+            "status": result[i].u_mission_status,
+            "context": result[i].mission_content,
+            "deadline": moment(result[i].mission_deadline).format("YYYY.MM.DD HH:mm"),
+            "point": result[i].mission_point,
+            "created_at": moment(result[i].created_at).format("YYYY.MM.DD HH:mm")
+        })
+    }
+
+    return {"mission": missionList};
 }
