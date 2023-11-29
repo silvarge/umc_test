@@ -67,3 +67,20 @@ export const userMissionListResponseDTO = (result) => {
 
     return {"mission": missionList};
 }
+
+export const changeUserMissionStatusResponseDTO = (result) => {
+    const missionList = [];
+
+    for (let i = 0; i < result.length; i++) {
+        missionList.push({
+            "userMissionId": result[i].u_mission_id,
+            "missionId": result[i].mission_id,
+            "status": result[i].u_mission_status,
+            "context": result[i].mission_content,
+            "created_at": moment(result[i].created_at).format("YYYY.MM.DD HH:mm")
+        })
+    }
+
+    return {"mission": missionList};
+
+}

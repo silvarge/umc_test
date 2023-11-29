@@ -1,7 +1,7 @@
 import { BaseError } from "../../config/error";
 import { status } from "../../config/response.status";
-import { challengeMissionResponseDTO, signinResponseDTO } from "../dtos/user.dto"
-import { addChallengeMission, addUser, getUser, getUserPreferToUserID, setPrefer } from "../models/user.dao";
+import { challengeMissionResponseDTO, changeUserMissionStatusResponseDTO, signinResponseDTO } from "../dtos/user.dto"
+import { addChallengeMission, addUser, changeUserMission, getUser, getUserPreferToUserID, setPrefer } from "../models/user.dao";
 
 // 회원가입 시 필요한 param 찾아 넣어야됨~
 export const joinUser = async (body) => {
@@ -44,4 +44,16 @@ export const challengeMission = async (missionId, userId) => {
         return challengeMissionResponseDTO(result);
     }
 
+}
+
+export const changeUserMissionStatus = async (query) => {
+
+    const { userId, missionId, paging = 3} = query;
+
+    if(!userId){
+        throw new BaseError(status.BAD_REQUEST);
+    }else{
+        const result = await changeUserMission(parseInt(userId), parseInt(missionId), parseInt(paging));
+        return changeUserMissionStatusResponseDTO(result);
+    }
 }

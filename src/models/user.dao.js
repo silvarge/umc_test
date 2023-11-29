@@ -1,7 +1,7 @@
 import { pool } from "../../config/db.connect";
 import { BaseError } from "../../config/error";
 import { status } from "../../config/response.status";
-import { challengeMissionSql, confirmEmail, connectFoodCategory, getChallengeMissionSql, getMyReviewSql, getPreferToUserID, getUserEmail, getUserID, getUserMissionListSql, insertUserSql, reviewCount, userMissionCount } from "./user.sql";
+import { challengeMissionSql, confirmEmail, connectFoodCategory, getChallengeMissionSql, getMyReviewSql, getPreferToUserID, getUserEmail, getUserID, getUserMissionListSql, insertUserSql, reviewCount, updateMissionStatusToSuccessSql, userMissionCount } from "./user.sql";
 
 // log in
 export const logInUser = async (data) => {
@@ -141,6 +141,23 @@ export const getUserMission = async (userId, missionId, paging, status) => {
 
         conn.release();
         return result;
+    } catch (err) {
+        console.error(err);
+        throw new BaseError(status.PARAMETER_IS_WRONG);
+    }
+}
+
+export const changeUserMission = async (userId, missionId, paging) => {
+    try {
+        const conn = await pool.getConnection();
+
+        await pool.query(updateMissionStatusToSuccessSql, missionId);
+        
+        const [result] = await pool.query(getUserMissionListSql, [userId, missionId, "success", paging]);
+
+        conn.release();
+        return result;
+        
     } catch (err) {
         console.error(err);
         throw new BaseError(status.PARAMETER_IS_WRONG);
